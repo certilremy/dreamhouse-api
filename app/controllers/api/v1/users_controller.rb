@@ -16,7 +16,16 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def login; end
+  def login
+    @user = User.find_by(username: params[:username])
+
+    if @user
+      token = encode_token({ user_id: @user.id })
+      render json: { user: @user, token: token }
+    else
+      render json: { error: 'Invalid username' }
+    end
+  end
 
   def auto_login; end
 
