@@ -5,4 +5,10 @@ class Api::V1::UsersController < ApplicationController
       format.json { render json: @users }
     end
   end
+
+  def login
+  end
+
+  def auto_login
+  end
 end
