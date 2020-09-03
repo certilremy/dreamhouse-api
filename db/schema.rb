@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(version: 2020_09_03_001501) do
   create_table "houses", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "users_id"
+    t.integer "user_id"
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["users_id"], name: "index_houses_on_users_id"
+    t.index ["user_id"], name: "index_houses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

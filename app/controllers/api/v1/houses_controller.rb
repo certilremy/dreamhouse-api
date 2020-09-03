@@ -38,6 +38,6 @@ class Api::V1::HousesController < ApplicationController
   end
 
   def house_params
-    params.require(:house).permit(:name, :description, :price)
+    params.require(:house).permit(:name, :description, :price, :user_id)
   end
 end

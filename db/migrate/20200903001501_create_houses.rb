@@ -3,7 +3,7 @@ class CreateHouses < ActiveRecord::Migration[6.0]
     create_table :houses do |t|
       t.string :name
       t.text :description
-      t.belongs_to :users
+      t.belongs_to :user
       t.integer :price
       t.timestamps
     end
