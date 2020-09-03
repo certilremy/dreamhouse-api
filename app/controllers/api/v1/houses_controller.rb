@@ -1,6 +1,6 @@
 class Api::V1::HousesController < ApplicationController
-  before_action :set_house, only: %i[show edit update destroy]
-  before_action :require_admin, except: %i[show index]
+  before_action :set_house, only: %i[show edit update destroy favorite]
+  before_action :require_admin, except: %i[show index favorite]
   def index
     @houses = House.all
     render json: { houses: @houses }
@@ -17,6 +17,11 @@ class Api::V1::HousesController < ApplicationController
     else
       render json: { error: 'Error saving the house' }
     end
+  end
+
+  def favorite
+    @favorite = Favorite.create(user_id: current_user.id, house_id: @house.id)
+    render json: { message: 'House was successfully added to your favorite!' }
   end
 
   def update
