@@ -1,11 +1,8 @@
 class Api::V1::HousesController < ApplicationController
   before_action :set_house, only: %i[show edit update destroy]
+  before_action :require_admin, except: %i[show index]
   def index
-    @houses = if current_user.admin == true
-                House.all
-              else
-                current_user.houses
-              end
+    @houses = House.all
     render json: { houses: @houses }
   end
 
@@ -43,5 +40,9 @@ class Api::V1::HousesController < ApplicationController
 
   def house_params
     params.require(:house).permit(:name, :description, :price, :user_id)
+  end
+
+  def require_admin
+    render json: { error: "You're not alowed to perform this operation" } if current_user.admin == false
   end
 end
