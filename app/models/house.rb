@@ -4,4 +4,5 @@ class House < ApplicationRecord
   validates :price, presence: true
   belongs_to :user
   validates_associated :user
+  has_many :favorites, dependent: :destroy
 end
