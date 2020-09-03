@@ -1,7 +1,11 @@
 class Api::V1::HousesController < ApplicationController
   before_action :set_house, only: %i[show edit update destroy]
   def index
-    @houses = House.all
+    @houses = if current_user.admin == true
+                House.all
+              else
+                current_user.houses
+              end
     render json: { houses: @houses }
   end
 
