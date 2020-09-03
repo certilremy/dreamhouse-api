@@ -1,11 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
 
-  def index
-    @users = User.all
-    render json: @users
-  end
-
   def create
     @user = User.create(user_params)
     if @user.valid?
@@ -27,7 +22,9 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def auto_login; end
+  def auto_login
+    render json: @user
+  end
 
   private
 
