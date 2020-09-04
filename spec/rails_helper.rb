@@ -23,10 +23,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include FactoryBot::Syntax::Methods
-
   config.use_transactional_fixtures = true
 
   config.infer_spec_type_from_file_location!
@@ -41,6 +39,21 @@ RSpec.configure do |config|
     end
   end
   config.filter_rails_from_backtrace!
-  # arbitrary gems may also be filtered via:
-  # config.filter_gems_from_backtrace("gem name")
+
+  def json
+    JSON.parse(response.body)
+  end
+
+  def confirm_user(user)
+    result = post '/api/v1/signup', params: { username: user.username }
+    puts 'the token'
+    puts result
+    puts json['token']
+  end
+
+  def auth_headers(user)
+    token = Knock::AuthToken.new(payload: { sub: user.id }).token
+    puts token
+    token
+  end
 end
