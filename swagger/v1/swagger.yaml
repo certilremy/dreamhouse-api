@@ -1,0 +1,58 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/signup":
+    post:
+      summary: signup endpoint
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: signup successfully, you can grap the token to peform other
+            operation
+          content: {}
+        '422':
+          description: invalid request, username to short minimum character is 4
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+  "/api/v1/login":
+    post:
+      summary: Login endpoint
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: login successfully to the app
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com

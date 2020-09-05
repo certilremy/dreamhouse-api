@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User API', type: :request do
-  let(:attributes) { { "username": "certilremytes" } }
+  let(:attributes) { { "username": 'certilremytes' } }
 
   describe 'POST /api/v1/signup' do
     before { post '/api/v1/signup', params: attributes }
