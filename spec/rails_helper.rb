@@ -44,16 +44,17 @@ RSpec.configure do |config|
     JSON.parse(response.body)
   end
 
-  def confirm_user(user)
-    result = post '/api/v1/signup', params: { username: user.username }
-    puts 'the token'
-    puts result
-    puts json['token']
+  def auth_headers(user)
+    {
+      'Authorization' => 'Bearer ' + ApplicationController.new.encode_token({ user_id: user.id }),
+      'Content-Type' => 'application/json'
+    }
   end
 
-  def auth_headers(user)
-    token = Knock::AuthToken.new(payload: { sub: user.id }).token
-    puts token
-    token
+  def fake_headers
+    {
+      'Authorization' => 'Bearer 1234567890',
+      'Content-Type' => 'application/json'
+    }
   end
 end
