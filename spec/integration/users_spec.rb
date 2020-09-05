@@ -50,4 +50,25 @@ describe 'Users API' do
       end
     end
   end
+
+  path '/api/v1/user/{id}/admin' do
+    get 'Easiest way to make an user admin to test the House endpoint' do
+      tags 'Users'
+      description 'Since the House endpoints are restricted only for admin. I create this endpoint for you, to make a user became admin very easy'
+      produces 'application/json'
+      parameter name: :id, in: :path, type: :integer
+
+      response '200', 'User is now admin' do
+        run_test!
+      end
+
+      response '422', 'invalid request ' do
+        run_test!
+      end
+
+      response '401', 'User not found ' do
+        run_test!
+      end
+    end
+  end
 end

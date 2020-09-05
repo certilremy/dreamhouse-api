@@ -22,6 +22,15 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  # this method is only there for you to make a new user became admin , with thad you can test the documentation live
+  # I know yo don't want us to comment our code, this is not a comment. This is just a notice for you.
+  def b_admin
+    @user = User.find(params[:id])
+    @user.admin = true
+    @user.save
+    render json: { message: 'User is now an admin you can test the houses endpoint now.' }
+  end
+
   private
 
   def user_params

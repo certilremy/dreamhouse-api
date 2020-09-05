@@ -61,7 +61,7 @@ paths:
           content: {}
   "/api/v1/favorites/{id}":
     patch:
-      summary: Send request to update an favorite with a given ID
+      summary: Send request to update a favorite with a given ID
       tags:
       - favorites
       description: This endpoint alow you to send request to update a favorite
@@ -341,6 +341,29 @@ paths:
                   type: string
               required:
               - username
+  "/api/v1/user/{id}/admin":
+    get:
+      summary: Easiest way to make an user admin to test the House endpoint
+      tags:
+      - Users
+      description: Since the House endpoints are restricted only for admin. I create
+        this endpoint for you, to make a user became admin very easy
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: User is now admin
+          content: {}
+        '422':
+          description: 'invalid request '
+          content: {}
+        '401':
+          description: 'User not found '
+          content: {}
 servers:
 - url: http://{defaultHost}
   variables:
