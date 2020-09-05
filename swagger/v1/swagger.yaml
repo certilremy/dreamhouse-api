@@ -1,18 +1,201 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: DREAM HOUSE API
   version: v1
+  description: Welcome to dream house api documentation. Use the request below to
+    sent request to test the api
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: bearer
 paths:
+  "/api/v1/houses":
+    get:
+      summary: endpoint to get all the houses
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to get all the Houses. You
+        must be logged in.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: Succefully get all the houses
+          content: {}
+        '401':
+          description: Error Unauthorized, you must pass the login token in the authorize
+            form to login
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+    post:
+      summary: Creates a house
+      tags:
+      - Houses
+      description: 'This endpoint alow you to send request to create an House. To
+        do that the logged in user must be an admin. '
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '201':
+          description: House created
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+        '200':
+          description: You're not alowed to perform this operation (user must be an
+            admin)
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                description:
+                  type: string
+                user_id:
+                  type: integer
+              required:
+              - name
+              - price
+              - description
+              - user_id
+  "/api/v1/houses/{id}":
+    get:
+      summary: Retrieves a single house with a given id
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to get a single Houses.
+        You must be logged in.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: house found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: integer
+                  user_id:
+                    type: integer
+                required:
+                - id
+        '404':
+          description: House not found
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+    patch:
+      summary: Send request to update an house with a given ID
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to update an House. To do
+        that, the logged in user must be an admin.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: House created
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+        '200':
+          description: You're not alowed to perform this operation (user must be an
+            admin)
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                description:
+                  type: string
+                user_id:
+                  type: integer
+              required:
+              - name
+              - price
+              - description
+              - user_id
+    delete:
+      summary: Delete a single house
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to delete a single Houses.
+        You must be logged in and must be an admin.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: house deleted
+          content: {}
+        '404':
+          description: House not found
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
   "/api/v1/signup":
     post:
       summary: signup endpoint
       tags:
       - Users
+      description: This endpoint alow you to send request to create a User. You don't
+        neet to be authorize
       parameters: []
       responses:
         '201':
-          description: signup successfully, you can grap the token to peform other
+          description: signup successfully, you can grab the token to peform other
             operation
           content: {}
         '422':
@@ -33,13 +216,15 @@ paths:
       summary: Login endpoint
       tags:
       - Users
+      description: This endpoint alow you to send request to login a User. You don't
+        neet to be authorize
       parameters: []
       responses:
         '201':
           description: login successfully to the app
           content: {}
         '422':
-          description: invalid request
+          description: 'invalid request '
           content: {}
       requestBody:
         content:
@@ -55,4 +240,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: www.example.com
+      default: localhost:3000

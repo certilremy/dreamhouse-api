@@ -4,6 +4,7 @@ describe 'Users API' do
   path '/api/v1/signup' do
     post 'signup endpoint' do
       tags 'Users'
+      description "This endpoint alow you to send request to create a User. You don't neet to be authorize"
       consumes 'application/json'
       parameter username: :user, in: :body, schema: {
         type: :object,
@@ -28,6 +29,7 @@ describe 'Users API' do
   path '/api/v1/login' do
     post 'Login endpoint' do
       tags 'Users'
+      description "This endpoint alow you to send request to login a User. You don't neet to be authorize"
       consumes 'application/json'
       parameter username: :user, in: :body, schema: {
         type: :object,
