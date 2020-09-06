@@ -66,6 +66,7 @@ describe 'Houses API' do
           name: { type: :string },
           price: { type: :integer },
           description: { type: :string },
+          number_0f_rooms: {type: :integer},
           user_id: { type: :integer }
         },
         required: %w[name price description user_id]

@@ -21,7 +21,7 @@
 <p align="center">
   <a href="#about">About</a> •
   <a href="#developement">Using the developement</a> •
-  <a href="#live">Live version</a> •
+  <a href="https://dreamhouse-swagger.herokuapp.com/api-docs/index.html">Live Doc interaction</a> •
   <a href="#documentation">Usin the documentation</a> •
   <a href="#dependency">Dependencys</a>
 </p>
@@ -63,7 +63,7 @@ This will run all the tests, If you make change to any file to the spec/integrat
 
 ## Documentation
 
-You can go there to test the [live documentation interaction](https://github.com/amitmerchant1990/electron-markdownify/releases/tag/v1.2.0). As you can see in the video, you must be logged in. IF you do not have an account create one in the signup endpoint with the documentation.
+You can go there to test the [live documentation interaction](https://dreamhouse-swagger.herokuapp.com/api-docs/index.html). As you can see in the video, you must be logged in. IF you do not have an account create one in the signup endpoint with the documentation.
 
 ## Dependency
 
