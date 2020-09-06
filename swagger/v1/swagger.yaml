@@ -355,7 +355,7 @@ paths:
         schema:
           type: integer
       responses:
-        '201':
+        '200':
           description: User is now admin
           content: {}
         '422':
