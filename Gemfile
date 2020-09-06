@@ -26,12 +26,12 @@ gem 'jwt'
 gem 'rack-cors'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rspec-rails', '~> 3.5'
   gem 'sqlite3', '~> 1.4'
 end
 
 group :production do
   gem 'pg', '1.1.4'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :test do
