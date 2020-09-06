@@ -30,7 +30,7 @@
 
 ## About
 
-Dream house API , is a simple aplication where, user can see house and add them to favorite. Only admin can add edit and delete house. Live production of the API can be found here
+Dream house API , is a simple aplication where, user can see house and add them to favorite. Only admin can add edit and delete house. Live production of the API can be found here https://dreamhouse-swagger.herokuapp.com/api-docs/index.html
 
 
 ## Developement 
