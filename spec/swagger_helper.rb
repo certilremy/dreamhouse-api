@@ -21,7 +21,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://dreamhouse-swagger.herokuapp.com/',
+          url: 'https://dreamhouse-swagger.herokuapp.com/'
         }
       ]
     }
