@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       post "/login", to: "users#login"
       post "/signup", to: "users#create"
       post "/house/:id/favorite", to: "houses#favorite"
-      get "/auto_login", to: "users#auto_login"
       
      #This route is only  here to allow you make a user became admin very easy. I'm not planing to put it on a real live project
      # I put it here just in case you want to test the House endpoint in the live documentation. 
