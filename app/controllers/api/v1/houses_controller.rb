@@ -1,6 +1,12 @@
 class Api::V1::HousesController < ApplicationController
   before_action :set_house, only: %i[show edit update destroy favorite]
   before_action :require_admin, except: %i[show index favorite]
+  before_action :authorized, exept: [:home]
+
+  def home
+    render json: { message: 'Welcome please use our Documentation to start making request' }
+  end
+
   def index
     @houses = House.all
     render json: { houses: @houses }
