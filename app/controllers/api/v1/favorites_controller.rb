@@ -1,8 +1,13 @@
 class Api::V1::FavoritesController < ApplicationController
-  before_action :set_favorite, only: %i[edit update destroy]
+  before_action :set_favorite, only: %i[update destroy]
+  before_action :require_same_user, only: %i[update]
 
   def index
-    @favorites = Favorite.all
+    @favorites = if current_user.admin == true
+                   Favorite.all
+                 else
+                   current_user.favorites
+                 end
     render json: { favorites: @favorites }
   end
 
@@ -27,5 +32,9 @@ class Api::V1::FavoritesController < ApplicationController
 
   def favorite_params
     params.require(:favorite).permit(:house_id)
+  end
+
+  def require_same_user
+    render json: { error: "You're not alowed to peform this operation" } if current_user != @favorite.user && current_user.admin == false
   end
 end
