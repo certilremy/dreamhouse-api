@@ -2,11 +2,7 @@ class Api::V1::FavoritesController < ApplicationController
   before_action :set_favorite, only: %i[edit update destroy]
 
   def index
-    @favorites = if current_user.admin == true
-                   Favorite.all
-                 else
-                   current_user.favorites
-                 end
+    @favorites = Favorite.all
     render json: { favorites: @favorites }
   end
 
