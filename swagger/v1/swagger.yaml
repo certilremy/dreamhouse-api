@@ -366,6 +366,3 @@ paths:
           content: {}
 servers:
 - url: https://dreamhouse-swagger.herokuapp.com/
-  variables:
-    defaultHost:
-      default: localhost:3000

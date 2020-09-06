@@ -21,13 +21,7 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://{defaultHost}',
           url: 'https://dreamhouse-swagger.herokuapp.com/',
-          variables: {
-            defaultHost: {
-              default: 'localhost:3000'
-            }
-          }
         }
       ]
     }
