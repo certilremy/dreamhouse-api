@@ -47,6 +47,9 @@ $ cd dreamhouse-api
 # Install dependencies
 $ bundle install
 
+# Rub the migration
+$ rails db:migrate
+
 # Run the app
 $ rails s
 
