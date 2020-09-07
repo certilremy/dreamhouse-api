@@ -17,7 +17,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rubocop', '~>0.81.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+gem 'pg', '1.1.4'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'knock'
@@ -26,11 +26,9 @@ gem 'jwt'
 gem 'rack-cors'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'sqlite3', '~> 1.4'
 end
 
 group :production do
-  gem 'pg', '1.1.4'
   gem 'rspec-rails', '~> 3.5'
 end
 
