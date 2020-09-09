@@ -1,0 +1,370 @@
+---
+openapi: 3.0.1
+info:
+  title: DREAM HOUSE API
+  version: v1
+  description: Welcome to dream house api documentation. Use the request below to
+    sent request to test the api
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: bearer
+paths:
+  "/api/v1/favorites":
+    get:
+      summary: endpoint to get all favorites
+      tags:
+      - favorites
+      description: This endpoint alow you to send request to get all the favorites.
+        You must be logged in.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: Succefully get all the favorites
+          content: {}
+        '401':
+          description: Error Unauthorized, you must pass the login token in the authorize
+            form to login
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+  "/api/v1/house/{id}/favorite":
+    post:
+      summary: 'Add an house to favorite '
+      tags:
+      - favorites
+      description: This endpoint alow you to send request to add a given house as
+        favorite.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: House was successfully added to your favorite!
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+        '404':
+          description: Not found
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+  "/api/v1/favorites/{id}":
+    patch:
+      summary: Send request to update a favorite with a given ID
+      tags:
+      - favorites
+      description: This endpoint alow you to send request to update a favorite
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: favorite created
+          content: {}
+        '401':
+          description: Not found
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                house_id:
+                  type: integer
+              required:
+              - house_id
+    delete:
+      summary: Delete a single favorite
+      tags:
+      - favorites
+      description: This endpoint alow you to send request to delete a single favorites.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: favorite deleted
+          content: {}
+        '404':
+          description: favorite not found
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+  "/api/v1/houses":
+    get:
+      summary: endpoint to get all the houses
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to get all the Houses. You
+        must be logged in.
+      security:
+      - basic_auth: []
+      responses:
+        '200':
+          description: Succefully get all the houses
+          content: {}
+        '401':
+          description: Error Unauthorized, you must pass the login token in the authorize
+            form to login
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+    post:
+      summary: Creates a house
+      tags:
+      - Houses
+      description: 'This endpoint alow you to send request to create an House. To
+        do that the logged in user must be an admin. '
+      security:
+      - basic_auth: []
+      parameters: []
+      responses:
+        '201':
+          description: House created
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+        '200':
+          description: You're not alowed to perform this operation (user must be an
+            admin)
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                description:
+                  type: string
+                number_0f_rooms:
+                  type: integer
+                user_id:
+                  type: integer
+              required:
+              - name
+              - price
+              - description
+              - user_id
+  "/api/v1/houses/{id}":
+    get:
+      summary: Retrieves a single house with a given id
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to get a single Houses.
+        You must be logged in.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: house found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  price:
+                    type: integer
+                  user_id:
+                    type: integer
+                required:
+                - id
+        '404':
+          description: House not found
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+    patch:
+      summary: Send request to update an house with a given ID
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to update an House. To do
+        that, the logged in user must be an admin.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: House created
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+        '200':
+          description: You're not alowed to perform this operation (user must be an
+            admin)
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                description:
+                  type: string
+                user_id:
+                  type: integer
+              required:
+              - name
+              - price
+              - description
+              - user_id
+    delete:
+      summary: Delete a single house
+      tags:
+      - Houses
+      description: This endpoint alow you to send request to delete a single Houses.
+        You must be logged in and must be an admin.
+      security:
+      - basic_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: house deleted
+          content: {}
+        '404':
+          description: House not found
+          content: {}
+        '401':
+          description: Not authorized
+          content: {}
+  "/api/v1/signup":
+    post:
+      summary: signup endpoint
+      tags:
+      - Users
+      description: This endpoint alow you to send request to create a User. You don't
+        neet to be authorize
+      parameters: []
+      responses:
+        '201':
+          description: signup successfully, you can grab the token to peform other
+            operation
+          content: {}
+        '422':
+          description: invalid request, username to short minimum character is 4
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+  "/api/v1/login":
+    post:
+      summary: Login endpoint
+      tags:
+      - Users
+      description: This endpoint alow you to send request to login a User. You don't
+        neet to be authorize
+      parameters: []
+      responses:
+        '201':
+          description: login successfully to the app
+          content: {}
+        '422':
+          description: 'invalid request '
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+  "/api/v1/user/{id}/admin":
+    get:
+      summary: Easiest way to make an user admin to test the House endpoint
+      tags:
+      - Users
+      description: Since the House endpoints are restricted only for admin. I create
+        this endpoint for you, to make a user became admin very easy
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: User is now admin
+          content: {}
+        '422':
+          description: 'invalid request '
+          content: {}
+        '401':
+          description: 'User not found '
+          content: {}
+servers:
+- url: https://dreamhouse-swagger.herokuapp.com/
