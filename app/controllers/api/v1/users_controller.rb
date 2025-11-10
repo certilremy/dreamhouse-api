@@ -1,6 +1,9 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
 
+  # The create method creates a new user.
+  # It takes the username as a parameter.
+  # Returns the created user and a token.
   def create
     @user = User.create(user_params)
     if @user.valid?
@@ -11,6 +14,9 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+  # The login method logs in a user.
+  # It takes the username as a parameter.
+  # Returns the user and a token.
   def login
     @user = User.find_by(username: params[:username])
 
@@ -22,8 +28,9 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # this method is only there for you to make a new user became admin , with thad you can test the documentation live
-  # I know yo don't want us to comment our code, this is not a comment. This is just a notice for you.
+  # The b_admin method makes a user an admin.
+  # It takes the id of the user as a parameter.
+  # Returns a message indicating that the user is now an admin.
   def b_admin
     @user = User.find(params[:id])
     @user.admin = true

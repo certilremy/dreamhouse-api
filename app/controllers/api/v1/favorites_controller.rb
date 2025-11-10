@@ -2,6 +2,10 @@ class Api::V1::FavoritesController < ApplicationController
   before_action :set_favorite, only: %i[update destroy]
   before_action :require_same_user, only: %i[update]
 
+  # The index method returns all favorites for the current user.
+  # If the user is an admin, it returns all favorites.
+  # No parameters are taken.
+  # Returns a list of favorites.
   def index
     @favorites = if current_user.admin == true
                    Favorite.all
@@ -11,6 +15,9 @@ class Api::V1::FavoritesController < ApplicationController
     render json: { favorites: @favorites }
   end
 
+  # The update method updates a favorite.
+  # It takes the id of the favorite as a parameter.
+  # Returns a message indicating that the favorite was updated.
   def update
     if @favorite.update(favorite_params)
       render json: { message: 'Favorite was successfully updated!' }
@@ -19,6 +26,9 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
+  # The destroy method deletes a favorite.
+  # It takes the id of the favorite as a parameter.
+  # Returns a message indicating that the favorite was deleted.
   def destroy
     @favorite.destroy
     render json: { 'message' => 'favorite was successfully deleted' }.to_json
